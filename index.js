@@ -10,14 +10,15 @@ const postRoutes = require("./routes/postRoutes");
 const connection = async () => {
   try {
     await mongoose.connect(process.env.mongo_url);
-    console.log("connected");
+    console.log("connected to mongo");
+    app.listen(8080, () => {
+      console.log("Running on port 8080");
+    });
   } catch (err) {
     console.log(err);
   }
 };
+connection();
 app.use("/user", userRoutes);
 app.use("/post", postRoutes);
-app.listen(8080, () => {
-  connection();
-  console.log("Running on port 8080");
-});
+
